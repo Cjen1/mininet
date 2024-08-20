@@ -308,6 +308,8 @@ class TCIntf( Intf ):
                          ' handle 10: netem ' +
                          netemargs ]
                 parent = ' parent 10:1 '
+                if loss is not None:
+                    cmds += [ '%s qdisc add dev %s parent 10:1 pfifo limit 1000' ]
         return cmds, parent
 
     def tc( self, cmd, tc='tc' ):
